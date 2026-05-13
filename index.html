@@ -1,0 +1,1764 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Medicampus</title>
+
+<style>
+
+/* =======================================================
+   RESET
+======================================================= */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+
+  font-family:Arial,sans-serif;
+
+  background:
+  linear-gradient(
+  135deg,
+  #050816,
+  #090018,
+  #130022
+  );
+
+  color:white;
+
+  overflow:hidden;
+
+  height:100vh;
+
+}
+
+/* =======================================================
+   FONDO
+======================================================= */
+
+.bg{
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:0;
+
+  background:
+  radial-gradient(
+  circle at 20% 20%,
+  rgba(255,0,140,.18),
+  transparent 30%
+  ),
+
+  radial-gradient(
+  circle at 80% 30%,
+  rgba(0,255,255,.12),
+  transparent 30%
+  ),
+
+  radial-gradient(
+  circle at 50% 80%,
+  rgba(140,0,255,.15),
+  transparent 30%
+  );
+
+}
+
+/* =======================================================
+   PARTICULAS
+======================================================= */
+
+.particle{
+
+  position:absolute;
+
+  width:4px;
+  height:4px;
+
+  border-radius:50%;
+
+  background:#ff4fd8;
+
+  opacity:.5;
+
+  animation:float 8s linear infinite;
+
+}
+
+@keyframes float{
+
+  from{
+    transform:translateY(100vh);
+  }
+
+  to{
+    transform:translateY(-100px);
+  }
+
+}
+
+/* =======================================================
+   NAV
+======================================================= */
+
+.nav{
+
+  position:fixed;
+
+  top:0;
+  left:0;
+  right:0;
+
+  z-index:999;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  padding:25px 60px;
+
+  background:
+  rgba(0,0,0,.2);
+
+  backdrop-filter:blur(15px);
+
+  border-bottom:
+  1px solid rgba(255,255,255,.05);
+
+}
+
+/* =======================================================
+   LOGO
+======================================================= */
+
+.logo{
+
+  font-size:48px;
+
+  font-weight:bold;
+
+  letter-spacing:2px;
+
+  background:
+  linear-gradient(
+  90deg,
+  #ff4fd8,
+  #7d7dff,
+  #00f0ff
+  );
+
+  -webkit-background-clip:text;
+
+  -webkit-text-fill-color:transparent;
+
+}
+
+/* =======================================================
+   MENU
+======================================================= */
+
+.menu{
+
+  display:flex;
+
+  gap:35px;
+
+}
+
+.menu span{
+
+  cursor:pointer;
+
+  transition:.3s;
+
+  opacity:.8;
+
+  font-size:18px;
+
+}
+
+.menu span:hover{
+
+  color:#ff4fd8;
+
+  opacity:1;
+
+}
+
+/* =======================================================
+   PAGINAS
+======================================================= */
+
+.page{
+
+  display:none;
+
+  width:100%;
+
+  height:100vh;
+
+  overflow-y:auto;
+
+  padding-top:130px;
+
+}
+
+.page.active{
+
+  display:block;
+
+}
+
+/* =======================================================
+   HERO
+======================================================= */
+
+.hero{
+
+  width:100%;
+
+  min-height:calc(100vh - 120px);
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  gap:40px;
+
+  padding:40px 80px;
+
+  position:relative;
+
+  z-index:10;
+
+}
+
+/* =======================================================
+   TEXTO
+======================================================= */
+
+.hero-text{
+
+  max-width:650px;
+
+}
+
+.hero-text h1{
+
+  font-size:110px;
+
+  line-height:.95;
+
+}
+
+.hero-text span{
+
+  background:
+  linear-gradient(
+  90deg,
+  #ff4fd8,
+  #ff9de6
+  );
+
+  -webkit-background-clip:text;
+
+  -webkit-text-fill-color:transparent;
+
+  text-shadow:
+  0 0 30px rgba(255,0,140,.5);
+
+}
+
+.hero-text p{
+
+  margin-top:30px;
+
+  font-size:22px;
+
+  opacity:.8;
+
+  line-height:1.7;
+
+}
+
+/* =======================================================
+   BOTON
+======================================================= */
+
+.hero-btn{
+
+  margin-top:35px;
+
+  padding:18px 40px;
+
+  border:none;
+
+  border-radius:18px;
+
+  background:
+  linear-gradient(
+  90deg,
+  #ff4fd8,
+  #ff7ce8
+  );
+
+  color:white;
+
+  font-size:18px;
+
+  font-weight:bold;
+
+  cursor:pointer;
+
+  transition:.3s;
+
+  box-shadow:
+  0 0 30px rgba(255,0,140,.35);
+
+}
+
+.hero-btn:hover{
+
+  transform:
+  translateY(-5px)
+  scale(1.03);
+
+}
+
+/* =======================================================
+   VISUAL
+======================================================= */
+
+.visual{
+
+  width:420px;
+
+  height:420px;
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+}
+
+/* =======================================================
+   CARD 3D
+======================================================= */
+
+.card-3d{
+
+  width:320px;
+
+  height:380px;
+
+  border-radius:35px;
+
+  overflow:hidden;
+
+  position:relative;
+
+  transform:
+  rotate(-10deg);
+
+  background:
+  linear-gradient(
+  145deg,
+  rgba(255,255,255,.08),
+  rgba(255,255,255,.02)
+  );
+
+  border:
+  1px solid rgba(255,255,255,.08);
+
+  backdrop-filter:blur(20px);
+
+  box-shadow:
+  0 0 60px rgba(255,0,140,.25);
+
+}
+
+/* =======================================================
+   BRILLO
+======================================================= */
+
+.card-3d::before{
+
+  content:"";
+
+  position:absolute;
+
+  width:180px;
+
+  height:500px;
+
+  background:
+  rgba(255,255,255,.1);
+
+  transform:
+  rotate(25deg);
+
+  left:-100px;
+
+  top:-80px;
+
+}
+
+/* =======================================================
+   TITULO CARD
+======================================================= */
+
+.mock-title{
+
+  padding:25px;
+
+  font-size:22px;
+
+  font-weight:bold;
+
+  color:#ff9de6;
+
+}
+
+/* =======================================================
+   MOCK
+======================================================= */
+
+.mock-products{
+
+  padding:30px;
+
+  display:grid;
+
+  grid-template-columns:
+  repeat(2,1fr);
+
+  gap:20px;
+
+}
+
+.mock-box{
+
+  height:110px;
+
+  border-radius:20px;
+
+  background:
+  linear-gradient(
+  145deg,
+  rgba(255,255,255,.12),
+  rgba(255,255,255,.04)
+  );
+
+  border:
+  1px solid rgba(255,255,255,.08);
+
+}
+
+/* =======================================================
+   PRODUCTOS
+======================================================= */
+
+.products-grid{
+
+  margin-top:50px;
+
+  display:grid;
+
+  grid-template-columns:
+  repeat(auto-fill,minmax(250px,1fr));
+
+  gap:25px;
+
+}
+
+/* =======================================================
+   PRODUCT CARD
+======================================================= */
+
+.product-card{
+
+  overflow:hidden;
+
+  border-radius:25px;
+
+  background:
+  rgba(255,255,255,.05);
+
+  border:
+  1px solid rgba(255,255,255,.08);
+
+  transition:.3s;
+
+}
+
+.product-card:hover{
+
+  transform:
+  translateY(-8px);
+
+  box-shadow:
+  0 0 40px rgba(255,0,140,.25);
+
+}
+
+.product-card img{
+
+  width:100%;
+
+  height:220px;
+
+  object-fit:cover;
+
+}
+
+.product-info{
+
+  padding:20px;
+
+}
+
+.product-info h3{
+
+  color:#ff9de6;
+
+  margin-bottom:10px;
+
+}
+
+.product-info p{
+
+  opacity:.7;
+
+  line-height:1.6;
+
+}
+
+.price{
+
+  margin-top:15px;
+
+  font-size:24px;
+
+  font-weight:bold;
+
+}
+
+/* =======================================================
+   UPLOAD
+======================================================= */
+
+.upload-box{
+
+  margin-top:40px;
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:18px;
+
+  max-width:500px;
+
+}
+
+.upload-box input{
+
+  padding:18px;
+
+  border:none;
+
+  border-radius:15px;
+
+  background:
+  rgba(255,255,255,.08);
+
+  color:white;
+
+  font-size:16px;
+
+}
+
+.upload-box button{
+
+  padding:18px;
+
+  border:none;
+
+  border-radius:15px;
+
+  background:
+  linear-gradient(
+  90deg,
+  #ff4fd8,
+  #ff7ce8
+  );
+
+  color:white;
+
+  font-size:16px;
+
+  font-weight:bold;
+
+  cursor:pointer;
+
+  transition:.3s;
+
+}
+
+.upload-box button:hover{
+
+  transform:
+  scale(1.03);
+
+}
+
+/* =======================================================
+   RESPONSIVE
+======================================================= */
+
+@media(max-width:900px){
+
+  body{
+    overflow:auto;
+  }
+
+  .hero{
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    text-align:center;
+
+    padding:40px 20px;
+
+  }
+
+  .hero-text h1{
+
+    font-size:65px;
+
+  }
+
+  .hero-text p{
+
+    font-size:18px;
+
+  }
+
+  .logo{
+
+    font-size:32px;
+
+  }
+
+  .nav{
+
+    flex-direction:column;
+
+    gap:20px;
+
+  }
+
+  .visual{
+
+    width:100%;
+
+  }
+
+}
+
+/* =======================================================
+   CARRITO
+======================================================= */
+
+.cart-box{
+
+margin-top:40px;
+
+padding:30px;
+
+border-radius:25px;
+
+background:
+rgba(255,255,255,.05);
+
+border:
+1px solid rgba(255,255,255,.08);
+
+}
+
+.cart-btn{
+
+margin-top:20px;
+
+width:100%;
+
+padding:15px;
+
+border:none;
+
+border-radius:15px;
+
+background:
+linear-gradient(
+90deg,
+#ff4fd8,
+#ff7ce8
+);
+
+color:white;
+
+font-weight:bold;
+
+cursor:pointer;
+
+}
+
+   /* =======================================================
+   MOBILE PRO
+======================================================= */
+
+@media(max-width:768px){
+
+body{
+
+overflow-x:hidden;
+
+}
+
+.nav{
+
+padding:18px 20px;
+
+flex-direction:column;
+
+gap:15px;
+
+}
+
+.logo{
+
+font-size:38px;
+
+text-align:center;
+
+}
+
+.menu{
+
+width:100%;
+
+justify-content:center;
+
+flex-wrap:wrap;
+
+gap:18px;
+
+}
+
+.menu span{
+
+font-size:16px;
+
+}
+
+.hero{
+
+padding:30px 20px;
+
+flex-direction:column;
+
+text-align:center;
+
+min-height:auto;
+
+}
+
+.hero-text{
+
+max-width:100%;
+
+}
+
+.hero-text h1{
+
+font-size:58px;
+
+line-height:1;
+
+}
+
+.hero-text p{
+
+font-size:18px;
+
+line-height:1.6;
+
+margin-top:20px;
+
+}
+
+.hero-btn{
+
+width:100%;
+
+padding:18px;
+
+font-size:18px;
+
+}
+
+.visual{
+
+width:100%;
+
+display:flex;
+
+justify-content:center;
+
+}
+
+.card-3d{
+
+width:280px;
+
+height:340px;
+
+transform:none;
+
+}
+
+.products-grid{
+
+grid-template-columns:1fr;
+
+gap:25px;
+
+margin-top:30px;
+
+}
+
+.product-card{
+
+width:100%;
+
+}
+
+.product-card img{
+
+height:240px;
+
+object-fit:cover;
+
+}
+
+.product-info{
+
+padding:20px;
+
+}
+
+.product-info h3{
+
+font-size:28px;
+
+}
+
+.product-info p{
+
+font-size:17px;
+
+line-height:1.7;
+
+}
+
+.price{
+
+font-size:32px;
+
+margin-top:20px;
+
+}
+
+.cart-btn{
+
+padding:18px;
+
+font-size:17px;
+
+}
+
+.upload-box{
+
+width:100%;
+
+}
+
+.upload-box input{
+
+width:100%;
+
+font-size:17px;
+
+padding:18px;
+
+}
+
+.upload-box button{
+
+width:100%;
+
+padding:18px;
+
+font-size:18px;
+
+}
+
+.cart-box{
+
+padding:25px;
+
+margin-top:30px;
+
+}
+
+.page{
+
+padding-top:170px;
+
+padding-bottom:80px;
+
+}
+
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- =======================================================
+     FONDO
+======================================================= -->
+
+<div class="bg"></div>
+
+<!-- =======================================================
+     PARTICULAS
+======================================================= -->
+
+<div class="particle"
+style="left:10%;animation-duration:9s;"></div>
+
+<div class="particle"
+style="left:20%;animation-duration:7s;"></div>
+
+<div class="particle"
+style="left:35%;animation-duration:11s;"></div>
+
+<div class="particle"
+style="left:50%;animation-duration:6s;"></div>
+
+<div class="particle"
+style="left:65%;animation-duration:10s;"></div>
+
+<div class="particle"
+style="left:80%;animation-duration:8s;"></div>
+
+<div class="particle"
+style="left:15%;animation-duration:12s;"></div>
+
+<div class="particle"
+style="left:25%;animation-duration:9s;"></div>
+
+<div class="particle"
+style="left:45%;animation-duration:14s;"></div>
+
+<div class="particle"
+style="left:55%;animation-duration:7s;"></div>
+
+<div class="particle"
+style="left:75%;animation-duration:13s;"></div>
+
+<div class="particle"
+style="left:90%;animation-duration:10s;"></div>
+
+<div class="particle"
+style="left:5%;animation-duration:11s;"></div>
+
+<!-- =======================================================
+     NAV
+======================================================= -->
+
+<div class="nav">
+
+<div class="logo">
+Medicampus
+</div>
+
+<div class="menu">
+
+<span onclick="showPage('inicio')">
+Inicio
+</span>
+
+<span onclick="showPage('productos')">
+Productos
+</span>
+
+<span onclick="showPage('subir')">
+Subir
+</span>
+
+<span onclick="showPage('nosotros')">
+Nosotros
+</span>
+
+</div>
+
+</div>
+
+<!-- =======================================================
+     INICIO
+======================================================= -->
+
+<section id="inicio"
+class="page active">
+
+<div class="hero">
+
+<div class="hero-text">
+
+<h1>
+TU TIENDA
+<br>
+<span>ONLINE</span>
+</h1>
+
+<p>
+
+Conoce Nuestra Historia
+
+<br><br>
+
+Como estudiantes de medicina,
+sabemos que en nuestra profesión
+no hay margen de error.
+
+<br><br>
+
+MediCampus nació al experimentar
+nosotros mismos la falta de insumos
+que fueran, a la vez, de alta calidad
+y accesibles.
+
+<br><br>
+
+Nuestra ventaja es clara:
+no solo vendemos insumos,
+entendemos para qué se usan.
+
+<br><br>
+
+Seleccionamos cada producto
+bajo un riguroso criterio clínico
+para garantizar que tanto
+profesionales como estudiantes
+tengan las mejores herramientas
+en sus manos.
+
+</p>
+
+<button
+class="hero-btn"
+onclick="showPage('productos')">
+
+Explorar
+
+</button>
+
+</div>
+
+<div class="visual">
+
+<div class="card-3d">
+
+<div class="mock-title">
+Medicampus Store
+</div>
+
+<div class="mock-products">
+
+<div class="mock-box"></div>
+<div class="mock-box"></div>
+<div class="mock-box"></div>
+<div class="mock-box"></div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =======================================================
+     PRODUCTOS
+======================================================= -->
+
+<section id="productos"
+class="page">
+
+<div class="hero">
+
+<div class="hero-text">
+
+<h1>
+PRODUCTOS
+</h1>
+
+<p>
+Explora todos los productos de Medicampus.
+</p>
+
+<div class="products-grid"
+id="productsGrid">
+
+<!-- ESTETOSCOPIO -->
+
+<div class="product-card">
+
+<img src="https://images.unsplash.com/photo-1655313719493-16ebe4906441?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+
+<div class="product-info">
+
+<h3>
+Estetoscopio
+</h3>
+
+<p>
+Instrumento médico esencial para la auscultación
+de sonidos cardíacos y pulmonares.
+Ideal para estudiantes y profesionales de salud.
+</p>
+
+<div class="price">
+$23.000
+</div>
+
+<button
+class="cart-btn"
+onclick="addToCart('Estetoscopio','$23.000')">
+
+Agregar al carrito
+
+</button>
+
+</div>
+
+</div>
+
+<!-- TENSIOMETRO -->
+
+<div class="product-card">
+
+<img src="https://images.unsplash.com/photo-1615486511484-92e172cc4fe0?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+
+<div class="product-info">
+
+<h3>
+Tensiómetro digital
+</h3>
+
+<p>
+Permite medir la presión arterial
+de manera rápida y precisa.
+Perfecto para monitoreo clínico y doméstico.
+</p>
+
+<div class="price">
+$25.000
+</div>
+
+<button
+class="cart-btn"
+onclick="addToCart('Tensiómetro digital','$25.000')">
+
+Agregar al carrito
+
+</button>
+
+</div>
+
+</div>
+
+<!-- OXIMETRO -->
+
+<div class="product-card">
+
+<img src="https://plus.unsplash.com/premium_photo-1679511007734-ac3e2affd267?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+
+<div class="product-info">
+
+<h3>
+Oxímetro de pulso
+</h3>
+
+<p>
+Mide niveles de oxígeno en sangre
+y frecuencia cardíaca.
+Compacto y fácil de usar.
+</p>
+
+<div class="price">
+$18.000
+</div>
+
+<button
+class="cart-btn"
+onclick="addToCart('Oxímetro','$18.000')">
+
+Agregar al carrito
+
+</button>
+
+</div>
+
+</div>
+
+<!-- GUANTES -->
+
+<div class="product-card">
+
+<img src="https://images.unsplash.com/photo-1599412227383-b7d4751c8765?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+
+<div class="product-info">
+
+<h3>
+Guantes de nitrilo
+</h3>
+
+<p>
+Guantes resistentes y desechables
+para protección médica e higiene clínica.
+</p>
+
+<div class="price">
+$2.000
+</div>
+
+<button
+class="cart-btn"
+onclick="addToCart('Guantes de nitrilo','$2.000')">
+
+Agregar al carrito
+
+</button>
+
+</div>
+
+</div>
+
+<!-- GASAS -->
+
+<div class="product-card">
+
+<img src="https://plus.unsplash.com/premium_photo-1672073400013-95d963f9e520?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+
+<div class="product-info">
+
+<h3>
+Gasas estériles
+</h3>
+
+<p>
+Ideales para limpieza de heridas
+y procedimientos médicos seguros.
+</p>
+
+<div class="price">
+$500
+</div>
+
+<button
+class="cart-btn"
+onclick="addToCart('Gasas estériles','$500')">
+
+Agregar al carrito
+
+</button>
+
+</div>
+
+</div>
+
+<!-- BATA -->
+
+<div class="product-card">
+
+<img src="https://plus.unsplash.com/premium_photo-1676325103072-ad18a21bcd29?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+
+<div class="product-info">
+
+<h3>
+Bata desechable
+</h3>
+
+<p>
+Protección higiénica para ambientes
+clínicos y hospitalarios.
+</p>
+
+<div class="price">
+$5.000
+</div>
+
+<button
+class="cart-btn"
+onclick="addToCart('Bata desechable','$5.000')">
+
+Agregar al carrito
+
+</button>
+
+</div>
+
+</div>
+
+<!-- LATEX -->
+
+<div class="product-card">
+
+<img src="https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+
+<div class="product-info">
+
+<h3>
+Guantes de látex
+</h3>
+
+<p>
+Alta sensibilidad y comodidad
+para exámenes médicos y procedimientos.
+</p>
+
+<div class="price">
+$1.000
+</div>
+
+<button
+class="cart-btn"
+onclick="addToCart('Guantes de látex','$1.000')">
+
+Agregar al carrito
+
+</button>
+
+</div>
+
+</div>
+
+<!-- TAPABOCAS -->
+
+<div class="product-card">
+
+<img src="https://images.unsplash.com/photo-1597440658768-f3ffdf64223c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+
+<div class="product-info">
+
+<h3>
+Tapabocas
+</h3>
+
+<p>
+Protección respiratoria desechable
+para ambientes clínicos y cotidianos.
+</p>
+
+<div class="price">
+$600
+</div>
+
+<button
+class="cart-btn"
+onclick="addToCart('Tapabocas','$600')">
+
+Agregar al carrito
+
+</button>
+
+</div>
+
+</div>
+
+<!-- GORROS -->
+
+<div class="product-card">
+
+<img src="https://plus.unsplash.com/premium_photo-1664304327468-82cfd5886b55?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+
+<div class="product-info">
+
+<h3>
+Gorros quirúrgicos
+</h3>
+
+<p>
+Cobertura sanitaria cómoda y segura
+para procedimientos médicos.
+</p>
+
+<div class="price">
+$500
+</div>
+
+<button
+class="cart-btn"
+onclick="addToCart('Gorros quirúrgicos','$500')">
+
+Agregar al carrito
+
+</button>
+
+</div>
+
+</div>
+
+<!-- ALGODON -->
+
+<div class="product-card">
+
+<img src="https://tse2.mm.bing.net/th/id/OIP.V9_dgSSTFciYWJQywx_SUQHaEK?r=0&pid=ImgDet&w=187&h=105&c=7&dpr=1,3&o=7&rm=33D">
+
+<div class="product-info">
+
+<h3>
+Algodones
+</h3>
+
+<p>
+Uso médico y hospitalario
+para limpieza y curaciones.
+</p>
+
+<div class="price">
+$7.000
+</div>
+
+<button
+class="cart-btn"
+onclick="addToCart('Algodones','$7.000')">
+
+Agregar al carrito
+
+</button>
+
+</div>
+
+</div>
+
+   <!-- JERINGA -->
+
+<div class="product-card">
+
+<img src="https://cdn.pixabay.com/photo/2021/01/17/02/02/syringe-5922249_1280.jpg">
+   
+<div class="product-info">
+
+<h3>
+Jeringa
+</h3>
+
+<p>
+Instrumento médico desechable
+utilizado para aplicar medicamentos
+y extraer líquidos de forma segura
+e higiénica.
+</p>
+
+<div class="price">
+$1.500
+</div>
+
+<button
+class="cart-btn"
+onclick="addToCart('Jeringa','$1.500')">
+
+Agregar al carrito
+
+</button>
+
+</div>
+
+</div>
+<div class="cart-box">
+
+<h2>
+🛒 Carrito
+</h2>
+
+<div id="cartItems">
+
+<p>
+No hay productos agregados.
+</p>
+
+</div>
+
+<h3 id="cartTotal">
+Total: $0
+</h3>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =======================================================
+     SUBIR
+======================================================= -->
+
+<section id="subir"
+class="page">
+
+<div class="hero">
+
+<div class="hero-text">
+
+<h1>
+SUBIR
+</h1>
+
+<p>
+Agrega nuevos productos a Medicampus.
+</p>
+
+<div class="upload-box">
+
+<input
+type="text"
+id="productName"
+placeholder="Nombre del producto">
+
+<input
+type="text"
+id="productPrice"
+placeholder="Precio">
+
+<input
+type="text"
+id="productImage"
+placeholder="URL imagen">
+
+   <input
+type="text"
+id="productDesc"
+placeholder="Descripción del producto">
+
+<button
+onclick="addProduct()">
+
+Agregar producto
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =======================================================
+     NOSOTROS
+======================================================= -->
+
+<section id="nosotros"
+class="page">
+
+<div class="hero">
+
+<div class="hero-text">
+
+<h1>
+NOSOTROS
+</h1>
+
+<p>
+Medicampus es una tienda moderna
+enfocada en diseño futurista y
+experiencia visual premium.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<script>
+
+/* =======================================================
+   CAMBIO PAGINAS
+======================================================= */
+
+function showPage(id){
+
+  document
+  .querySelectorAll(".page")
+  .forEach(page=>{
+
+    page.classList.remove("active");
+
+  });
+
+  document
+  .getElementById(id)
+  .classList.add("active");
+
+}
+
+/* =======================================================
+   AGREGAR PRODUCTOS
+======================================================= */
+
+function addProduct(){
+
+  const name =
+  document.getElementById("productName").value;
+
+  const price =
+  document.getElementById("productPrice").value;
+
+  const image =
+  document.getElementById("productImage").value;
+
+   const desc =
+document.getElementById("productDesc").value;
+
+  const grid =
+  document.getElementById("productsGrid");
+
+  if(
+    name === "" ||
+    price === "" ||
+    image === ""
+  ){
+    alert("Completa todos los campos");
+    return;
+  }
+
+ grid.innerHTML += `
+
+<div class="product-card">
+
+<img src="${image}">
+
+<div class="product-info">
+
+<h3>
+${name}
+</h3>
+
+<p>
+${desc}
+</p>
+
+<div class="price">
+${price}
+</div>
+
+<button
+class="cart-btn"
+onclick="addToCart('${name}','${price}')">
+
+Agregar al carrito
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+  document.getElementById("productName").value = "";
+
+  document.getElementById("productPrice").value = "";
+
+  document.getElementById("productImage").value = "";
+
+  alert("Producto agregado");
+document.getElementById("productDesc").value = "";
+}
+
+let total = 0;
+
+function addToCart(name,price){
+
+const cart =
+document.getElementById("cartItems");
+
+const number =
+parseInt(
+price.replace(/\D/g,'')
+);
+
+total += number;
+
+cart.innerHTML += `
+
+<div style="
+margin-top:15px;
+padding:10px;
+background:rgba(255,255,255,.05);
+border-radius:10px;
+">
+
+${name} - ${price}
+
+</div>
+
+`;
+
+document.getElementById("cartTotal")
+.innerText =
+"Total: $" + total.toLocaleString();
+
+}
+   
+
+</script>
+
+</body>
+
+</html>
