@@ -1058,22 +1058,49 @@ Nosotros
      INICIO
 ======================================================= -->
 
-<section id="inicio"
-class="page active">
+<section id="inicio" class="page active">
 
-<div class="hero">
+<div class="hero" style="
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:80px;
+padding:120px 90px 60px;
+">
 
-<div class="hero-text">
+<!-- TEXTO -->
+
+<div class="hero-text" style="
+max-width:600px;
+">
 
 <h1 style="
-font-size:65px;
-line-height:1.1;
-text-align:center;
-width:100%;
+font-size:95px;
+line-height:.95;
+font-weight:900;
+margin-bottom:25px;
 ">
-<span>Medicampus</span>
+
+TU TIENDA
+<br>
+
+<span style="
+background:linear-gradient(90deg,#ff4fd8,#ff9de6);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+text-shadow:0 0 35px rgba(255,0,140,.5);
+">
+ONLINE
+</span>
+
 </h1>
-<p>
+
+<p style="
+font-size:21px;
+line-height:1.9;
+opacity:.85;
+margin-top:20px;
+">
 
 Conoce Nuestra Historia
 
@@ -1087,56 +1114,42 @@ no hay margen de error.
 
 MediCampus nació al experimentar
 nosotros mismos la falta de insumos
-que fueran, a la vez, de alta calidad
-y accesibles.
+de alta calidad y accesibles.
 
 <br><br>
 
-Nuestra ventaja es clara:
-no solo vendemos insumos,
+No solo vendemos productos,
 entendemos para qué se usan.
-
-<br><br>
-
-Seleccionamos cada producto
-bajo un riguroso criterio clínico
-para garantizar que tanto
-profesionales como estudiantes
-tengan las mejores herramientas
-en sus manos.
 
 </p>
 
 <button
 class="hero-btn"
-onclick="showPage('productos')">
-
-Explorar
-
+onclick="showPage('productos')"
+style="
+margin-top:35px;
+">
+Explorar productos
 </button>
 
 </div>
 
-<div class="visual" style="
-width:100%;
-display:flex;
-justify-content:center;
-align-items:center;
-">
+<!-- LOGO -->
 
 <div style="
-width:100%;
+flex:1;
 display:flex;
 justify-content:center;
 align-items:center;
 ">
+
 <img 
 src="./LOGO.png"
-alt="Logo Medicampus"
+alt="Medicampus Logo"
 
 style="
-width:750px;
-max-width:85%;
+width:650px;
+max-width:100%;
 height:auto;
 object-fit:contain;
 
@@ -1147,16 +1160,14 @@ drop-shadow(0 0 120px #ff4fd8);
 
 animation:floatLogo 3s ease-in-out infinite;
 "
->
+/>
 
 </div>
 
-</div>
 </div>
 
 </section>
-
-<!-- =======================================================
+   <!-- =======================================================
      PRODUCTOS
 ======================================================= -->
 
