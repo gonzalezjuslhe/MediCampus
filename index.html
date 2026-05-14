@@ -148,25 +148,41 @@ body{
    LOGO
 ======================================================= */
 
-.logo{
+.logo img{
 
-  font-size:48px;
+  width:180px;
 
-  font-weight:bold;
+  height:auto;
 
-  letter-spacing:2px;
+  object-fit:contain;
 
-  background:
-  linear-gradient(
-  90deg,
-  #ff4fd8,
-  #7d7dff,
-  #00f0ff
-  );
+  filter:
+  drop-shadow(0 0 10px #ff4fd8)
+  drop-shadow(0 0 25px #ff4fd8)
+  drop-shadow(0 0 40px #ff4fd8);
 
-  -webkit-background-clip:text;
+  animation:glow 2s infinite alternate;
 
-  -webkit-text-fill-color:transparent;
+}
+
+@keyframes glow{
+
+  from{
+
+    filter:
+    drop-shadow(0 0 10px #ff4fd8)
+    drop-shadow(0 0 20px #ff4fd8);
+
+  }
+
+  to{
+
+    filter:
+    drop-shadow(0 0 20px #ff7ce8)
+    drop-shadow(0 0 45px #ff4fd8)
+    drop-shadow(0 0 60px #ff4fd8);
+
+  }
 
 }
 
@@ -1015,9 +1031,8 @@ style="left:5%;animation-duration:11s;"></div>
 <div class="nav">
 
 <div class="logo">
-Medicampus
+  <img src="LOGOTIPO.png" alt="Medicampus Logo">
 </div>
-
 <div class="menu">
 
 <span onclick="showPage('inicio')">
