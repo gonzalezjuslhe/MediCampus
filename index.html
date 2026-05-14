@@ -1045,9 +1045,6 @@ Inicio
 Productos
 </span>
 
-<span onclick="showPage('subir')">
-Subir
-</span>
 
 <span onclick="showPage('nosotros')">
 Nosotros
@@ -1575,61 +1572,6 @@ Total: $0
 </section>
 
 
-<!-- =======================================================
-     SUBIR
-======================================================= -->
-
-<section id="subir"
-class="page">
-
-<div class="hero">
-
-<div class="hero-text">
-
-<h1>
-SUBIR
-</h1>
-
-<p>
-Agrega nuevos productos a Medicampus.
-</p>
-
-<div class="upload-box">
-
-<input
-type="text"
-id="productName"
-placeholder="Nombre del producto">
-
-<input
-type="text"
-id="productPrice"
-placeholder="Precio">
-
-<input
-type="text"
-id="productImage"
-placeholder="URL imagen">
-
-   <input
-type="text"
-id="productDesc"
-placeholder="Descripción del producto">
-
-<button
-onclick="addProduct()">
-
-Agregar producto
-
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
 
 <!-- =======================================================
      NOSOTROS
@@ -1683,76 +1625,6 @@ function showPage(id){
 /* =======================================================
    AGREGAR PRODUCTOS
 ======================================================= */
-
-function addProduct(){
-
-  const name =
-  document.getElementById("productName").value;
-
-  const price =
-  document.getElementById("productPrice").value;
-
-  const image =
-  document.getElementById("productImage").value;
-
-   const desc =
-document.getElementById("productDesc").value;
-
-  const grid =
-  document.getElementById("productsGrid");
-
-  if(
-    name === "" ||
-    price === "" ||
-    image === ""
-  ){
-    alert("Completa todos los campos");
-    return;
-  }
-
- grid.innerHTML += `
-
-<div class="product-card">
-
-<img src="${image}">
-
-<div class="product-info">
-
-<h3>
-${name}
-</h3>
-
-<p>
-${desc}
-</p>
-
-<div class="price">
-${price}
-</div>
-
-<button
-class="cart-btn"
-onclick="addToCart('${name}','${price}')">
-
-Agregar al carrito
-
-</button>
-
-</div>
-
-</div>
-
-`;
-
-  document.getElementById("productName").value = "";
-
-  document.getElementById("productPrice").value = "";
-
-  document.getElementById("productImage").value = "";
-
-  alert("Producto agregado");
-document.getElementById("productDesc").value = "";
-}
 
 let total = 0;
 
