@@ -183,6 +183,21 @@ body{
     drop-shadow(0 0 60px #ff4fd8);
 
   }
+   @keyframes floatLogo{
+
+0%{
+transform:translateY(0px);
+}
+
+50%{
+transform:translateY(-12px);
+}
+
+100%{
+transform:translateY(0px);
+}
+
+}
 
 }
 
@@ -1120,19 +1135,34 @@ Explorar
 
 <div class="card-3d">
 
-<div class="mock-title">
-Medicampus Store
+<div style="
+width:100%;
+height:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:30px;
+">
+
+<img 
+src="./LOGO.png"
+alt="Logo Medicampus"
+
+style="
+width:260px;
+height:auto;
+object-fit:contain;
+
+filter:
+drop-shadow(0 0 20px #ff4fd8)
+drop-shadow(0 0 40px #ff4fd8)
+drop-shadow(0 0 60px #ff4fd8);
+
+animation:floatLogo 3s ease-in-out infinite;
+"
+>
+
 </div>
-
-<div class="mock-products">
-
-<div class="mock-box"></div>
-<div class="mock-box"></div>
-<div class="mock-box"></div>
-<div class="mock-box"></div>
-
-</div>
-
 </div>
 
 </div>
